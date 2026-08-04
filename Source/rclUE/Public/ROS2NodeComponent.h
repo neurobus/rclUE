@@ -503,6 +503,11 @@ public:
                                     const TSubclassOf<UROS2GenericMsg>& InMsgClass,
                                     const UROS2QoS InQoS = UROS2QoS::Default);
 
+    UROS2Publisher* CreatePublisher(const FString& InTopicName,
+                                    const TSubclassOf<UROS2Publisher>& InPublisherClass,
+                                    const TSubclassOf<UROS2GenericMsg>& InMsgClass,
+                                    const rmw_qos_profile_t& InCustomQoS);
+
     /**
      * @brief Methods to register subscribers.
      * @param TopicName

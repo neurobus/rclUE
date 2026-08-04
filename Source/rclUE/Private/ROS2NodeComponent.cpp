@@ -203,6 +203,23 @@ UROS2Publisher* UROS2NodeComponent::CreatePublisher(const FString& InTopicName,
     return publisher;
 }
 
+UROS2Publisher* UROS2NodeComponent::CreatePublisher(
+    const FString& InTopicName,
+    const TSubclassOf<UROS2Publisher>& InPublisherClass,
+    const TSubclassOf<UROS2GenericMsg>& InMsgClass,
+    const rmw_qos_profile_t& InCustomQoS)
+{
+    UROS2Publisher* publisher = UROS2Publisher::CreatePublisher(
+        this,
+        InTopicName,
+        InPublisherClass,
+        InMsgClass,
+        -1.0f,
+        InCustomQoS);
+    AddPublisher(publisher);
+    return publisher;
+}
+
 // Subscriber////////////////////
 void UROS2NodeComponent::AddSubscription(UROS2Subscriber* InSubscriber)
 {
