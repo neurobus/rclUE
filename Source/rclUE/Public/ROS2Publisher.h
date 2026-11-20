@@ -126,6 +126,12 @@ public:
     UFUNCTION(BlueprintCallable)
     void Publish();
 
+    /** Publish and report whether rcl accepted the message. */
+    bool PublishChecked();
+
+    /** Return whether the underlying rcl publisher is usable. */
+    bool IsReady() const;
+
     /**
      * @brief Publish a message
      *

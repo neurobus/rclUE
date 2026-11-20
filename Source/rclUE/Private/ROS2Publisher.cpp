@@ -148,14 +148,50 @@ void UROS2Publisher::UpdateAndPublish()
 
 void UROS2Publisher::Publish()
 {
+    PublishChecked();
+}
+
+bool UROS2Publisher::PublishChecked()
+{
     bool res = true;
     IS_TOPIC_INITED(OwnerNode, GetName(), res);
     if (!res)
     {
-        return;
+        return false;
     }
 
-    RCSOFTCHECK(rcl_publish(&RclPublisher, TopicMessage->Get(), nullptr));
+    if (!rcl_publisher_is_valid(&RclPublisher))
+    {
+        UE_LOG_WITH_INFO_NAMED(
+            LogROS2Topic,
+            Error,
+            TEXT("ROS publisher handle is invalid for topic '%s'"),
+            *TopicName);
+        return false;
+    }
+
+    const rcl_ret_t Result =
+        rcl_publish(&RclPublisher, TopicMessage->Get(), nullptr);
+    if (Result != RCL_RET_OK)
+    {
+        UE_LOG_WITH_INFO_NAMED(
+            LogROS2Topic,
+            Error,
+            TEXT("rcl_publish failed for topic '%s': status=%d"),
+            *TopicName,
+            static_cast<int32>(Result));
+        rcutils_reset_error();
+        return false;
+    }
+
+    return true;
+}
+
+bool UROS2Publisher::IsReady() const
+{
+    return State == UROS2State::Initialized &&
+        IsValid(TopicMessage) &&
+        rcl_publisher_is_valid(&RclPublisher);
 }
 
 void UROS2Publisher::SetDelegates(const FTopicCallback& InUpdateDelegate)
