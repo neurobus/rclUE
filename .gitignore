@@ -53,3 +53,12 @@ Intermediate/*
 
 _readthedocs
 docs/source/README.md
+
+# Local codegen output for the SIL_sim message packages (std_msgs, neurobus_msgs).
+# Already tracked files (e.g. ROS2StdHeader) are not affected by these rules.
+Source/rclUE/*/Msgs/ROS2Std*
+Source/rclUE/*/Msgs/ROS2Neurobus*
+Source/rclUE/*/Msgs/ROS2Timestamped*
+Source/rclUE/*/Srvs/ROS2PeekRemoteCameraStream.*
+ThirdParty/ros/include/neurobus_msgs/
+ThirdParty/ros/lib/libneurobus_msgs__*.so

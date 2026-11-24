@@ -15,60 +15,41 @@
 
 // Generated Msg/Srv/Action(can be empty)
 
-
 // Generated
 #include "ROS2StdEmpty.generated.h"
 
 USTRUCT(Blueprintable)
-struct RCLUE_API FROSStdEmpty
-{
-	GENERATED_BODY()
+struct RCLUE_API FROSStdEmpty {
+  GENERATED_BODY()
 
 public:
-	
+  FROSStdEmpty() {}
 
-	
+  void SetFromROS2(const std_msgs__msg__Empty &in_ros_data) {}
 
-	FROSStdEmpty()
-	{
-		
-	}
-
-	void SetFromROS2(const std_msgs__msg__Empty& in_ros_data)
-	{
-    	
-	}
-
-	void SetROS2(std_msgs__msg__Empty& out_ros_data) const
-	{
-    	
-	}
+  void SetROS2(std_msgs__msg__Empty &out_ros_data) const {}
 };
 
 UCLASS()
-class RCLUE_API UROS2StdEmptyMsg : public UROS2GenericMsg
-{
-	GENERATED_BODY()
+class RCLUE_API UROS2StdEmptyMsg : public UROS2GenericMsg {
+  GENERATED_BODY()
 
 public:
-	virtual void Init() override;
-	virtual void Fini() override;
+  virtual void Init() override;
+  virtual void Fini() override;
 
-	virtual const rosidl_message_type_support_t* GetTypeSupport() const override;
-	
-  	UFUNCTION(BlueprintCallable)
-	void SetMsg(const FROSStdEmpty& Input);
-	
-  	UFUNCTION(BlueprintCallable)
-	void GetMsg(FROSStdEmpty& Output) const;
-	
-	virtual void* Get() override;
+  virtual const rosidl_message_type_support_t *GetTypeSupport() const override;
 
-	
+  UFUNCTION(BlueprintCallable)
+  void SetMsg(const FROSStdEmpty &Input);
 
+  UFUNCTION(BlueprintCallable)
+  void GetMsg(FROSStdEmpty &Output) const;
+
+  virtual void *Get() override;
 
 private:
-	virtual FString MsgToString() const override;
+  virtual FString MsgToString() const override;
 
-	std_msgs__msg__Empty empty_msg;
+  std_msgs__msg__Empty empty_msg;
 };
